@@ -180,62 +180,67 @@
         <h2 class="text-4xl font-bold mb-6">
             🚀 Website Growth & Business Success Packs
         </h2>
-        <p class="text-gray-400 mb-4 text-lg">
-            Stop Losing Customers! Transform Your Website into a High-Converting Sales Powerhouse.
+        <p class="text-gray-300 mb-4 text-lg">
+            Stop Losing Customers! 94% of first impressions are design-related. Your website is your 24/7 salesperson—make it count!
         </p>
         <p class="text-green-400 font-semibold mb-8">
             ⭐ Trusted by 500+ Businesses | Limited-Time Discounts Available!
         </p>
         
         <div class="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Pricing Cards with Cloth Effect -->
-            <div class="bg-gray-800 p-8 rounded-lg border border-gray-700 shadow-lg shadow-gray-700/50 relative overflow-hidden group">
-                <div class="absolute inset-0 bg-black bg-opacity-90 backdrop-blur-lg flex items-center justify-center rounded-lg transition-opacity duration-700" onclick="revealPack(this)">
+            <!-- StarterX Pack (Reveals Fully) -->
+            <div class="bg-gray-800 p-8 rounded-lg border border-gray-700 shadow-lg shadow-gray-700/50 relative overflow-hidden">
+                <div class="absolute inset-0 bg-black bg-opacity-90 backdrop-blur-lg flex items-center justify-center rounded-lg transition-opacity duration-700" onclick="revealStarterX(this)">
                     <span class="text-2xl text-white font-bold">🛍️ Tap to Reveal</span>
                 </div>
                 <h3 class="text-2xl font-bold mb-4">StarterX Pack</h3>
-                <p class="text-4xl font-bold mb-2">₹XX,XXX</p>
-                <p class="text-red-400 font-semibold mb-4">Limited Offer: Save ₹X,XXX!</p>
+                <p class="text-4xl font-bold mb-2">₹39,999</p>
+                <p class="text-red-400 font-semibold mb-4">⚡ Limited Offer: Save ₹4,000! (Act Fast – Only 10 Spots Left!)</p>
+                <p class="text-yellow-400 font-medium">💡 Fact: Websites with strong branding convert 3x better!</p>
             </div>
 
-            <div class="bg-gray-800 p-8 rounded-lg border border-gray-700 shadow-lg shadow-gray-700/50 relative overflow-hidden group">
-                <div class="absolute inset-0 bg-black bg-opacity-90 backdrop-blur-lg flex items-center justify-center rounded-lg transition-opacity duration-700" onclick="revealPack(this)">
-                    <span class="text-2xl text-white font-bold">🛍️ Tap to Reveal</span>
+            <!-- Other Packs (Mystery Mode) -->
+            <div class="bg-gray-800 p-8 rounded-lg border border-gray-700 shadow-lg shadow-gray-700/50 relative overflow-hidden">
+                <div class="absolute inset-0 bg-black bg-opacity-90 backdrop-blur-lg flex items-center justify-center rounded-lg transition-opacity duration-700" onclick="revealSuspense(this)">
+                    <span class="text-2xl text-white font-bold">🕵️‍♂️ Classified – Tap for Clues</span>
                 </div>
                 <h3 class="text-2xl font-bold mb-4">GrowthX Pack</h3>
-                <p class="text-4xl font-bold mb-2">₹XX,XXX</p>
-                <p class="text-red-400 font-semibold mb-4">🔥 Bestseller! Save ₹X,XXX</p>
+                <p class="text-gray-400 italic">🔮 A secret formula for skyrocketing engagement.</p>
             </div>
-
-            <div class="bg-gray-800 p-8 rounded-lg border border-gray-700 shadow-lg shadow-gray-700/50 relative overflow-hidden group">
-                <div class="absolute inset-0 bg-black bg-opacity-90 backdrop-blur-lg flex items-center justify-center rounded-lg transition-opacity duration-700" onclick="revealPack(this)">
-                    <span class="text-2xl text-white font-bold">🛍️ Tap to Reveal</span>
+            <div class="bg-gray-800 p-8 rounded-lg border border-gray-700 shadow-lg shadow-gray-700/50 relative overflow-hidden">
+                <div class="absolute inset-0 bg-black bg-opacity-90 backdrop-blur-lg flex items-center justify-center rounded-lg transition-opacity duration-700" onclick="revealSuspense(this)">
+                    <span class="text-2xl text-white font-bold">⚡ Decrypting AI Secrets...</span>
                 </div>
                 <h3 class="text-2xl font-bold mb-4">⚡ DominanceX AI Pack</h3>
-                <p class="text-4xl font-bold mb-2">₹XX,XXX</p>
-                <p class="text-yellow-400 font-semibold mb-4">🔹 AI-Powered & Business-Ready</p>
+                <p class="text-gray-400 italic">🤖 Top businesses know something you don’t... yet.</p>
             </div>
-
-            <div class="bg-gray-800 p-8 rounded-lg border border-gray-700 shadow-lg shadow-gray-700/50 relative overflow-hidden group">
-                <div class="absolute inset-0 bg-black bg-opacity-90 backdrop-blur-lg flex items-center justify-center rounded-lg transition-opacity duration-700" onclick="revealPack(this)">
-                    <span class="text-2xl text-white font-bold">🛍️ Tap to Reveal</span>
+            <div class="bg-gray-800 p-8 rounded-lg border border-gray-700 shadow-lg shadow-gray-700/50 relative overflow-hidden">
+                <div class="absolute inset-0 bg-black bg-opacity-90 backdrop-blur-lg flex items-center justify-center rounded-lg transition-opacity duration-700" onclick="revealSuspense(this)">
+                    <span class="text-2xl text-white font-bold">🚀 A Game-Changer Awaits...</span>
                 </div>
                 <h3 class="text-2xl font-bold mb-4">Website Growth & Enhancement Pack</h3>
-                <p class="text-4xl font-bold mb-2">₹XX,XXX</p>
-                <p class="text-red-400 font-semibold mb-4">📈 Boost Your Site!</p>
+                <p class="text-gray-400 italic">🧩 Unlock the missing piece to online domination.</p>
             </div>
         </div>
     </section>
 
     <script>
-        function revealPack(element) {
+        function revealStarterX(element) {
             element.classList.add('opacity-0', 'pointer-events-none');
             setTimeout(() => {
-                element.innerHTML = "<span class='text-3xl font-bold text-white'>🔥 Something Big is Coming! 🔥</span>";
+                element.remove();
+            }, 700);
+        }
+        
+        function revealSuspense(element) {
+            element.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                element.innerHTML = "<span class='text-2xl font-bold text-white'>🔒 Not Yet... But Something Big is Brewing.</span>";
                 element.classList.remove('opacity-0', 'pointer-events-none');
             }, 700);
         }
     </script>
+</body>
 
   <section class="relative py-24 bg-gray-900 text-white overflow-hidden" id="resources">
     <!-- Background Glow & Effects -->
