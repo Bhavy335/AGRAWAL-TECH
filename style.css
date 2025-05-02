@@ -1,0 +1,191 @@
+body {
+    font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
+    background-color: #0f172a;
+    color: white;
+  }
+
+  /* Animations */
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 1s ease forwards;
+  }
+
+  .animate-delay-\[500ms\] {
+    animation-delay: 0.5s;
+  }
+
+  .animate-delay-\[900ms\] {
+    animation-delay: 0.9s;
+  }
+
+  .animate-delay-\[1200ms\] {
+    animation-delay: 1.2s;
+  }
+
+  .animate-delay-\[1500ms\] {
+    animation-delay: 1.5s;
+  }
+
+  @keyframes pulse-slow {
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 10s ease-in-out infinite;
+  }
+
+  /* Button shine effect */
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-shine::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.3) 100%);
+    transform: skewX(-25deg);
+    transition: left 0.7s ease;
+    z-index: 10;
+  }
+
+  .btn-shine:hover::before {
+    left: 125%;
+  }
+
+  /* Glow effect for red and blue */
+  .glow-red {
+    text-shadow: 0 0 8px #ff004f, 0 0 20px #ff004f;
+  }
+
+  .glow-blue {
+    text-shadow: 0 0 8px #3b82f6, 0 0 20px #3b82f6;
+  }
+
+  /* Scrollbar for arcade */
+  #arcade-container {
+    scrollbar-width: thin;
+    scrollbar-color: #ff004f transparent;
+  }
+
+  #arcade-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  #arcade-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  #arcade-container::-webkit-scrollbar-thumb {
+    background-color: #ff004f;
+    border-radius: 10px;
+    border: 2px solid transparent;
+  }
+
+  /* Masonry grid for garden */
+  .masonry {
+    column-count: 1;
+    column-gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .masonry {
+      column-count: 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .masonry {
+      column-count: 3;
+    }
+  }
+
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+    background: rgba(255 255 255 / 0.05);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 0 15px rgba(255 0 79 / 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .masonry-item:hover,
+  .masonry-item:focus-within {
+    transform: translateY(-6px);
+    box-shadow: 0 0 25px rgba(255 0 79 / 0.6);
+    outline: none;
+  }
+
+  /* Tag styles */
+  .tag {
+    display: inline-block;
+    background: #ff004f;
+    color: white;
+    padding: 0.15rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    user-select: none;
+  }
+
+  /* Badge popup */
+  #egg-badge {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ff004f;
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 0 15px #ff004f;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 9999;
+    user-select: none;
+  }
+
+  #egg-badge.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  /* Accessibility focus */
+  a:focus,
+  button:focus,
+  input:focus,
+  textarea:focus {
+    outline: 2px solid #ff004f;
+    outline-offset: 2px;
+  }

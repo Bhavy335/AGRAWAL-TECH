@@ -1,0 +1,734 @@
+<html class="scroll-smooth" lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Agrawal-Tech (Tech Innovate elevate dominate)
+  </title>
+  <link href="logo2.jpg" rel="icon" type="image/x-icon"/>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+  </script>
+  <style>
+   body {
+      font-family: "Poppins", sans-serif;
+      scroll-behavior: smooth;
+      background-color: #0f172a;
+      color: white;
+    }
+
+    /* Animations */
+    @keyframes fade-up {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fade-up 1s ease forwards;
+    }
+
+    .animate-delay-\[500ms\] {
+      animation-delay: 0.5s;
+    }
+
+    .animate-delay-\[900ms\] {
+      animation-delay: 0.9s;
+    }
+
+    .animate-delay-\[1200ms\] {
+      animation-delay: 1.2s;
+    }
+
+    .animate-delay-\[1500ms\] {
+      animation-delay: 1.5s;
+    }
+
+    @keyframes pulse-slow {
+      0%,
+      100% {
+        opacity: 0.4;
+      }
+
+      50% {
+        opacity: 0.7;
+      }
+    }
+
+    .animate-pulse-slow {
+      animation: pulse-slow 10s ease-in-out infinite;
+    }
+
+    /* Button shine effect */
+    .btn-shine {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-shine::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.3) 100%);
+      transform: skewX(-25deg);
+      transition: left 0.7s ease;
+      z-index: 10;
+    }
+
+    .btn-shine:hover::before {
+      left: 125%;
+    }
+
+    /* Glow effect for red and blue */
+    .glow-red {
+      text-shadow: 0 0 8px #ff004f, 0 0 20px #ff004f;
+    }
+
+    .glow-blue {
+      text-shadow: 0 0 8px #3b82f6, 0 0 20px #3b82f6;
+    }
+
+    /* Scrollbar for arcade */
+    #arcade-container {
+      scrollbar-width: thin;
+      scrollbar-color: #ff004f transparent;
+    }
+
+    #arcade-container::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    #arcade-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #arcade-container::-webkit-scrollbar-thumb {
+      background-color: #ff004f;
+      border-radius: 10px;
+      border: 2px solid transparent;
+    }
+
+    /* Masonry grid for garden */
+    .masonry {
+      column-count: 1;
+      column-gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .masonry {
+        column-count: 2;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .masonry {
+        column-count: 3;
+      }
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+      background: rgba(255 255 255 / 0.05);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 0 15px rgba(255 0 79 / 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .masonry-item:hover,
+    .masonry-item:focus-within {
+      transform: translateY(-6px);
+      box-shadow: 0 0 25px rgba(255 0 79 / 0.6);
+      outline: none;
+    }
+
+    /* Tag styles */
+    .tag {
+      display: inline-block;
+      background: #ff004f;
+      color: white;
+      padding: 0.15rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+      user-select: none;
+    }
+
+    /* Badge popup */
+    #egg-badge {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ff004f;
+      color: white;
+      padding: 0.75rem 1.25rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 0 15px #ff004f;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      z-index: 9999;
+      user-select: none;
+    }
+
+    #egg-badge.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* Accessibility focus */
+    a:focus,
+    button:focus,
+    input:focus,
+    textarea:focus {
+      outline: 2px solid #ff004f;
+      outline-offset: 2px;
+    }
+  </style>
+  <script>
+   document.addEventListener("DOMContentLoaded", () => {
+      AOS.init({
+        once: true,
+        duration: 1000,
+        easing: "ease-in-out",
+        offset: 100,
+      });
+    });
+  </script>
+ </head>
+ <body class="bg-gray-900 text-white overflow-x-hidden">
+  <!-- Hero Section -->
+  <section aria-label="Hero section with background video and main call to action" class="relative min-h-screen flex flex-col justify-center items-center text-center p-6 overflow-hidden" id="hero">
+   <!-- Multiple Background Videos (Auto Slideshow) -->
+   <div class="absolute inset-0 w-full h-full -z-20" id="video-container">
+    <video autoplay="" class="video-bg absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000" loop="" muted="" playsinline="" preload="auto">
+     <source src="video1.mp4" type="video/mp4"/>
+    </video>
+    <video autoplay="" class="video-bg absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000" loop="" muted="" playsinline="" preload="auto">
+     <source src="video2.mp4" type="video/mp4"/>
+    </video>
+    <video autoplay="" class="video-bg absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000" loop="" muted="" playsinline="" preload="auto">
+     <source src="video3.mp4" type="video/mp4"/>
+    </video>
+   </div>
+   <!-- Overlay Layers -->
+   <div class="absolute inset-0 bg-black/50 z-0 pointer-events-none">
+   </div>
+   <div class="absolute inset-0 bg-gradient-to-br from-transparent via-black/40 to-black/90 z-0 pointer-events-none animate-pulse-slow">
+   </div>
+   <!-- Background Logo -->
+   <div aria-hidden="true" class="absolute inset-0 flex justify-center items-center pointer-events-none z-0 blur-2xl opacity-10">
+    <img alt="Agrawal Tech Brand Logo, stylized red and white tech emblem with glowing effect" class="w-3/4 md:w-1/2" loading="lazy" src="logo2.jpg"/>
+   </div>
+   <!-- Text Content -->
+   <div class="relative z-10 max-w-4xl">
+    <h1 class="text-5xl md:text-6xl font-extrabold mb-6 text-white drop-shadow-xl animate-fade-up animate-delay-[500ms]">
+     <span aria-atomic="true" aria-live="polite" id="typewriter">
+     </span>
+    </h1>
+    <p class="text-xl sm:text-2xl text-gray-300 mb-6 leading-relaxed animate-fade-up animate-delay-[900ms]">
+     At Agrawal Tech, we blend creativity, engineering, and technology to help you thrive in the digital era.
+    </p>
+    <p class="text-lg sm:text-xl text-gray-300 font-semibold mb-10 animate-fade-up animate-delay-[1200ms]">
+     🚀 Innovate. Elevate. Dominate.
+    </p>
+    <!-- CTA Button -->
+    <a class="inline-block bg-gradient-to-r from-red-500 to-pink-500 text-white py-3 px-10 rounded-full font-bold text-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl animate-fade-up animate-delay-[1500ms]" href="#contact" role="button" tabindex="0">
+     Start Your Digital Transformation
+    </a>
+  </section>
+  <!-- Features Section -->
+  <section aria-label="Features and benefits of Agrawal-Tech" class="py-24 bg-gradient-to-b from-black to-gray-900 text-white relative" id="features">
+   <h2 class="text-5xl font-extrabold text-center mb-20 tracking-wide text-gray-100" data-aos="fade-down" tabindex="0">
+    Why Choose Agrawal Tech?
+   </h2>
+   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 max-w-7xl mx-auto px-6">
+    <article class="relative group bg-white/10 backdrop-blur-md p-10 rounded-3xl text-center shadow-xl hover:scale-110 hover:rotate-2 transition-all duration-300 border border-white/20" data-aos="zoom-in-up">
+     <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-transparent opacity-0 group-hover:opacity-20 transition-opacity rounded-3xl pointer-events-none">
+     </div>
+     <i class="fa-solid fa-pencil-ruler text-5xl text-blue-400 mb-6 drop-shadow-lg group-hover:scale-110 transition-all duration-300">
+     </i>
+     <h3 class="text-2xl font-semibold text-white mb-4">
+      Tailored Web Experiences
+     </h3>
+     <p class="text-gray-300 text-lg leading-relaxed">
+      We blend creativity and code to build fully tailored digital experiences that reflect your brand's voice and
+          business goals.
+     </p>
+    </article>
+    <article class="relative group bg-white/10 backdrop-blur-md p-10 rounded-3xl text-center shadow-xl hover:scale-110 hover:rotate-2 transition-all duration-300 border border-white/20" data-aos="zoom-in-up" data-aos-delay="100">
+     <div class="absolute inset-0 bg-gradient-to-r from-green-500/20 to-transparent opacity-0 group-hover:opacity-20 transition-opacity rounded-3xl pointer-events-none">
+     </div>
+     <i class="fa-solid fa-rocket text-5xl text-green-400 mb-6 drop-shadow-lg group-hover:scale-110 transition-all duration-300">
+     </i>
+     <h3 class="text-2xl font-semibold text-white mb-4">
+      SEO &amp; Blazing Speed
+     </h3>
+     <p class="text-gray-300 text-lg leading-relaxed">
+      Dominate search engines with advanced SEO, ultra-fast load times, image optimization, and mobile-first
+          performance tuning.
+     </p>
+    </article>
+    <article class="relative group bg-white/10 backdrop-blur-md p-10 rounded-3xl text-center shadow-xl hover:scale-110 hover:rotate-2 transition-all duration-300 border border-white/20" data-aos="zoom-in-up" data-aos-delay="200">
+     <div class="absolute inset-0 bg-gradient-to-r from-red-500/20 to-transparent opacity-0 group-hover:opacity-20 transition-opacity rounded-3xl pointer-events-none">
+     </div>
+     <i class="fa-solid fa-lock text-5xl text-red-400 mb-6 drop-shadow-lg group-hover:scale-110 transition-all duration-300">
+     </i>
+     <h3 class="text-2xl font-semibold text-white mb-4">
+      Cyber Defense Systems
+     </h3>
+     <p class="text-gray-300 text-lg leading-relaxed">
+      Built-in protection with SSL, secure backend logic, firewall setup, and real-time vulnerability tracking for
+          peace of mind.
+     </p>
+    </article>
+    <article class="relative group bg-white/10 backdrop-blur-md p-10 rounded-3xl text-center shadow-xl hover:scale-110 hover:rotate-2 transition-all duration-300 border border-white/20" data-aos="zoom-in-up" data-aos-delay="300">
+     <div class="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-transparent opacity-0 group-hover:opacity-20 transition-opacity rounded-3xl pointer-events-none">
+     </div>
+     <i class="fa-solid fa-robot text-5xl text-purple-400 mb-6 drop-shadow-lg group-hover:scale-110 transition-all duration-300">
+     </i>
+     <h3 class="text-2xl font-semibold text-white mb-4">
+      AI &amp; Automation
+     </h3>
+     <p class="text-gray-300 text-lg leading-relaxed">
+      Integrate smart automation, chatbots, and AI workflows that simplify processes and boost customer engagement
+          at scale.
+     </p>
+    </article>
+   </div>
+   <div class="absolute inset-0 z-0 bg-gradient-to-r from-indigo-600/30 via-pink-500/30 to-teal-400/30 opacity-40 animate-pulse">
+   </div>
+   <div class="absolute inset-0 pointer-events-none z-10">
+    <div class="absolute w-full h-full bg-gradient-to-r from-blue-500/30 to-teal-400/30 opacity-20 animate-pulse rounded-3xl">
+    </div>
+   </div>
+  </section>
+  <!-- Featured Projects Section -->
+  <section aria-label="Featured Projects" class="py-20 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white relative z-10" id="projects">
+   <div class="text-center mb-16 px-4 max-w-5xl mx-auto">
+    <h2 class="text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-600 mb-6">
+     ⚡ Featured Projects
+    </h2>
+    <p class="text-lg md:text-xl text-gray-300 font-light">
+     A curated selection of forward-thinking creations that blend cutting-edge design with exceptional functionality.
+        Explore the innovations.
+    </p>
+   </div>
+   <div class="flex justify-center mb-10 space-x-4">
+    <button aria-pressed="true" class="bg-transparent text-gray-300 font-semibold py-2 px-4 border border-gray-400 rounded-lg hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1" tabindex="0" type="button">
+     All Projects
+    </button>
+    <button aria-pressed="false" class="bg-transparent text-gray-300 font-semibold py-2 px-4 border border-gray-400 rounded-lg hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1" tabindex="0" type="button">
+     Web Development
+    </button>
+    <button aria-pressed="false" class="bg-transparent text-gray-300 font-semibold py-2 px-4 border border-gray-400 rounded-lg hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1" tabindex="0" type="button">
+     Design
+    </button>
+   </div>
+   <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto px-6">
+    <a class="relative group bg-white/5 border border-white/20 rounded-3xl overflow-hidden shadow-2xl hover:shadow-red-500/30 transition-all transform hover:scale-[1.05] backdrop-blur-md focus:outline-none focus:ring-4 focus:ring-red-500" href="https://bhavy335.github.io/Bhavy-Notes/" rel="noopener noreferrer" tabindex="0" target="_blank">
+     <img alt="Screenshot of Bhavy Notes Project showing psychology-driven UI with study resources" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out" loading="lazy" src="educational.png"/>
+     <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-6 pointer-events-none">
+      <div class="text-center text-white">
+       <h3 class="text-3xl font-bold drop-shadow-lg">
+        Bhavy Notes
+       </h3>
+       <p class="text-gray-300 text-base leading-relaxed mt-2">
+        🚀 Free &amp; Premium Study Resources with Psychology-Driven UI.
+       </p>
+      </div>
+     </div>
+     <div class="p-6 space-y-3">
+      <div class="flex flex-wrap gap-3 text-sm text-gray-300 font-semibold">
+       <span class="bg-red-600/20 px-3 py-1 rounded-full">
+        HTML
+       </span>
+       <span class="bg-pink-500/20 px-3 py-1 rounded-full">
+        CSS
+       </span>
+       <span class="bg-blue-400/20 px-3 py-1 rounded-full">
+        JavaScript
+       </span>
+      </div>
+      <p class="text-gray-300 text-sm leading-relaxed mt-3">
+       <strong>
+        Completed in:
+       </strong>
+       March 2025
+      </p>
+     </div>
+    </a>
+    <a class="relative group bg-white/5 border border-white/20 rounded-3xl overflow-hidden shadow-2xl hover:shadow-red-500/30 transition-all transform hover:scale-[1.05] backdrop-blur-md focus:outline-none focus:ring-4 focus:ring-red-500" href="https://bhavy335.github.io/Japanese-Restaurant/" rel="noopener noreferrer" tabindex="0" target="_blank">
+     <img alt="Screenshot of Japanese Restaurant Project showing traditional vibes with modern design and sushi imagery" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/7011678d-099a-46e2-edee-77de94ce9072.jpg" width="600"/>
+     <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-6 pointer-events-none">
+      <div class="text-center text-white">
+       <h3 class="text-3xl font-bold drop-shadow-lg">
+        Japanese Restaurant
+       </h3>
+       <p class="text-gray-300 text-base leading-relaxed mt-2">
+        🍣 Traditional vibes with modern design. Fast, responsive, and seamless experience.
+       </p>
+      </div>
+     </div>
+     <div class="p-6 space-y-3">
+      <div class="flex flex-wrap gap-3 text-sm text-gray-300 font-semibold">
+       <span class="bg-yellow-500/20 px-3 py-1 rounded-full">
+        HTML
+       </span>
+       <span class="bg-orange-400/20 px-3 py-1 rounded-full">
+        CSS
+       </span>
+       <span class="bg-red-500/20 px-3 py-1 rounded-full">
+        JavaScript
+       </span>
+      </div>
+      <p class="text-gray-300 text-sm leading-relaxed mt-3">
+       <strong>
+        Completed in:
+       </strong>
+       February 2025
+      </p>
+     </div>
+    </a>
+   </div>
+  </section>
+  <!-- Advanced SEO & Performance Section -->
+  <section aria-label="Advanced SEO and performance optimization features" class="relative py-28 bg-gradient-to-b from-gray-900 to-black text-white" id="seo">
+   <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-20" data-aos="fade-up">
+     <h2 class="text-5xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-500 to-purple-600">
+      Advanced SEO &amp; Performance Optimization
+     </h2>
+     <p class="mt-4 text-gray-400 text-lg max-w-3xl mx-auto">
+      Elevate your online presence with expert-level strategies built to rank, load, and convert.
+     </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+     <article class="relative p-[2px] rounded-3xl bg-gradient-to-tr from-green-500 via-blue-500 to-purple-600 hover:rotate-1 transition-transform duration-500" data-aos="zoom-in" data-aos-delay="100">
+      <div class="bg-gray-900 rounded-[inherit] p-8 h-full backdrop-blur-2xl">
+       <div class="text-green-400 text-6xl mb-6 transition-transform duration-300 group-hover:scale-110">
+        <i class="fas fa-search-dollar drop-shadow-lg">
+        </i>
+       </div>
+       <h3 class="text-xl font-semibold text-white mb-4">
+        Keyword &amp; Content Strategy
+       </h3>
+       <p class="text-gray-300 text-sm leading-relaxed">
+        🎯 Rank-ready content + keyword architecture that speaks to both users and Google’s algorithm.
+       </p>
+      </div>
+     </article>
+     <article class="relative p-[2px] rounded-3xl bg-gradient-to-tr from-blue-500 via-indigo-500 to-purple-600 hover:rotate-1 transition-transform duration-500" data-aos="zoom-in" data-aos-delay="200">
+      <div class="bg-gray-900 rounded-[inherit] p-8 h-full backdrop-blur-2xl">
+       <div class="text-blue-400 text-6xl mb-6">
+        <i class="fas fa-rocket drop-shadow-lg">
+        </i>
+       </div>
+       <h3 class="text-xl font-semibold text-white mb-4">
+        Performance &amp; Speed
+       </h3>
+       <p class="text-gray-300 text-sm leading-relaxed">
+        ⚡️ Web vitals approved. Optimized scripts, lazy loading, and CDN architecture for sub-1s loads.
+       </p>
+      </div>
+     </article>
+     <article class="relative p-[2px] rounded-3xl bg-gradient-to-tr from-purple-500 via-pink-500 to-red-500 hover:rotate-1 transition-transform duration-500" data-aos="zoom-in" data-aos-delay="300">
+      <div class="bg-gray-900 rounded-[inherit] p-8 h-full backdrop-blur-2xl">
+       <div class="text-purple-400 text-6xl mb-6">
+        <i class="fas fa-link drop-shadow-lg">
+        </i>
+       </div>
+       <h3 class="text-xl font-semibold text-white mb-4">
+        Link Building &amp; Authority
+       </h3>
+       <p class="text-gray-300 text-sm leading-relaxed">
+        🔗 We build smart, niche-focused backlinks that strengthen your domain authority organically.
+       </p>
+      </div>
+     </article>
+     <article class="relative p-[2px] rounded-3xl bg-gradient-to-tr from-pink-400 via-red-500 to-yellow-500 hover:rotate-1 transition-transform duration-500" data-aos="zoom-in" data-aos-delay="400">
+      <div class="bg-gray-900 rounded-[inherit] p-8 h-full backdrop-blur-2xl">
+       <div class="text-pink-400 text-6xl mb-6">
+        <i class="fas fa-mobile-alt drop-shadow-lg">
+        </i>
+       </div>
+       <h3 class="text-xl font-semibold text-white mb-4">
+        Mobile &amp; Accessibility
+       </h3>
+       <p class="text-gray-300 text-sm leading-relaxed">
+        📱 Perfectly adaptive UIs and WCAG-ready accessibility. Everyone gets a world-class experience.
+       </p>
+      </div>
+     </article>
+    </div>
+   </div>
+  </section>
+  <!-- Out-of-the-Box Creative Sections -->
+  <!-- Easter-Egg Arcade -->
+  <section aria-label="Easter-Egg Arcade with hidden clickable pixel eggs and badge popup" class="relative py-20 bg-gradient-to-b from-black via-gray-900 to-black text-white max-w-7xl mx-auto px-6" id="arcade">
+   <h2 class="text-4xl font-extrabold text-center mb-12 glow-red" data-aos="fade-up" tabindex="0">
+    🕹️ Easter-Egg Arcade
+   </h2>
+   <p class="text-center text-gray-400 max-w-3xl mx-auto mb-10" data-aos="fade-up" data-aos-delay="100">
+    Find hidden pixel eggs scattered around the page. Click them to earn badges, hear a sound, and unlock exclusive
+      discount codes!
+   </p>
+   <div aria-label="Scrollable arcade area with hidden pixel eggs" class="relative w-full h-96 rounded-3xl bg-gradient-to-tr from-red-900 via-black to-red-900 shadow-lg overflow-auto p-6" data-aos="fade-up" data-aos-delay="200" id="arcade-container" tabindex="0">
+    <!-- Pixel Eggs scattered as SVGs -->
+    <svg aria-label="Pixel egg 1" class="absolute top-10 left-8 w-8 h-8 cursor-pointer pixel-egg" fill="none" role="button" stroke="#ff004f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="filter: drop-shadow(0 0 2px #ff004f);" tabindex="0" viewbox="0 0 24 24">
+     <circle cx="12" cy="12" fill="#ff004f" r="10">
+     </circle>
+     <rect fill="#fff" height="6" width="6" x="9" y="9">
+     </rect>
+    </svg>
+    <svg aria-label="Pixel egg 2" class="absolute top-32 right-12 w-6 h-6 cursor-pointer pixel-egg" fill="none" role="button" stroke="#ff004f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="filter: drop-shadow(0 0 2px #ff004f);" tabindex="0" viewbox="0 0 24 24">
+     <circle cx="12" cy="12" fill="#ff004f" r="10">
+     </circle>
+     <rect fill="#fff" height="4" width="4" x="10" y="10">
+     </rect>
+    </svg>
+    <svg aria-label="Pixel egg 3" class="absolute bottom-20 left-20 w-7 h-7 cursor-pointer pixel-egg" fill="none" role="button" stroke="#ff004f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="filter: drop-shadow(0 0 2px #ff004f);" tabindex="0" viewbox="0 0 24 24">
+     <circle cx="12" cy="12" fill="#ff004f" r="10">
+     </circle>
+     <rect fill="#fff" height="8" width="8" x="8" y="8">
+     </rect>
+    </svg>
+    <svg aria-label="Pixel egg 4" class="absolute bottom-10 right-24 w-5 h-5 cursor-pointer pixel-egg" fill="none" role="button" stroke="#ff004f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="filter: drop-shadow(0 0 2px #ff004f);" tabindex="0" viewbox="0 0 24 24">
+     <circle cx="12" cy="12" fill="#ff004f" r="10">
+     </circle>
+     <rect fill="#fff" height="2" width="2" x="11" y="11">
+     </rect>
+    </svg>
+    <svg aria-label="Pixel egg 5" class="absolute top-1/2 left-1/2 w-9 h-9 cursor-pointer pixel-egg" fill="none" role="button" stroke="#ff004f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="filter: drop-shadow(0 0 2px #ff004f);" tabindex="0" viewbox="0 0 24 24">
+     <circle cx="12" cy="12" fill="#ff004f" r="10">
+     </circle>
+     <rect fill="#fff" height="10" width="10" x="7" y="7">
+     </rect>
+    </svg>
+    <svg aria-label="Pixel egg 6" class="absolute top-16 right-1/3 w-6 h-6 cursor-pointer pixel-egg" fill="none" role="button" stroke="#ff004f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="filter: drop-shadow(0 0 2px #ff004f);" tabindex="0" viewbox="0 0 24 24">
+     <circle cx="12" cy="12" fill="#ff004f" r="10">
+     </circle>
+     <rect fill="#fff" height="6" width="6" x="9" y="9">
+     </rect>
+    </svg>
+    <svg aria-label="Pixel egg 7" class="absolute bottom-28 right-1/4 w-7 h-7 cursor-pointer pixel-egg" fill="none" role="button" stroke="#ff004f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="filter: drop-shadow(0 0 2px #ff004f);" tabindex="0" viewbox="0 0 24 24">
+     <circle cx="12" cy="12" fill="#ff004f" r="10">
+     </circle>
+     <rect fill="#fff" height="8" width="8" x="8" y="8">
+     </rect>
+    </svg>
+    <svg aria-label="Pixel egg 8" class="absolute top-3/4 left-1/4 w-5 h-5 cursor-pointer pixel-egg" fill="none" role="button" stroke="#ff004f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="filter: drop-shadow(0 0 2px #ff004f);" tabindex="0" viewbox="0 0 24 24">
+     <circle cx="12" cy="12" fill="#ff004f" r="10">
+     </circle>
+     <rect fill="#fff" height="2" width="2" x="11" y="11">
+     </rect>
+    </svg>
+    <svg aria-label="Pixel egg 9" class="absolute top-10 left-3/4 w-6 h-6 cursor-pointer pixel-egg" fill="none" role="button" stroke="#ff004f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="filter: drop-shadow(0 0 2px #ff004f);" tabindex="0" viewbox="0 0 24 24">
+     <circle cx="12" cy="12" fill="#ff004f" r="10">
+     </circle>
+     <rect fill="#fff" height="6" width="6" x="9" y="9">
+     </rect>
+    </svg>
+    <svg aria-label="Pixel egg 10" class="absolute bottom-16 left-3/4 w-7 h-7 cursor-pointer pixel-egg" fill="none" role="button" stroke="#ff004f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="filter: drop-shadow(0 0 2px #ff004f);" tabindex="0" viewbox="0 0 24 24">
+     <circle cx="12" cy="12" fill="#ff004f" r="10">
+     </circle>
+     <rect fill="#fff" height="8" width="8" x="8" y="8">
+     </rect>
+    </svg>
+   </div>
+   <div aria-atomic="true" aria-live="polite" class="mt-8 text-center text-gray-300 font-semibold" id="egg-counter" tabindex="0">
+    Eggs found: 0 out of 10
+   </div>
+   <div aria-atomic="true" aria-live="assertive" id="egg-badge" role="alert" tabindex="0">
+   </div>
+  </section>
+  <!-- Real-Time Project Pulse -->
+  <section aria-label="Real-time project updates ticker" class="py-20 bg-gradient-to-b from-black to-gray-900 text-white" id="pulse">
+   <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-4xl font-extrabold text-center mb-12 glow-blue" data-aos="fade-up" tabindex="0">
+     💻 Real-Time Project
+        Pulse
+    </h2>
+    <div aria-atomic="false" aria-live="polite" class="max-w-4xl mx-auto space-y-4" data-aos="fade-up" data-aos-delay="100" id="pulse-container" role="list" tabindex="0">
+    </div>
+   </div>
+  </section>
+  <!-- Digital Garden -->
+  <section aria-label="Digital Garden with design and development ideas" class="py-20 bg-gradient-to-b from-gray-900 to-black" id="garden">
+   <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-4xl font-extrabold text-center mb-12 glow-red" data-aos="fade-up" tabindex="0">
+     🌱 Digital Garden
+    </h2>
+    <div aria-label="Digital garden posts" class="masonry" data-aos="fade-up" data-aos-delay="150" id="garden-grid" tabindex="0">
+    </div>
+   </div>
+  </section>
+  <!-- Contact Form Section -->
+  <section aria-label="Contact form to connect with Agrawal-Tech" class="relative py-24 bg-gray-900 text-white overflow-hidden" id="contact">
+   <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-500/10 to-teal-400/10 blur-3xl opacity-40">
+   </div>
+   <div class="relative z-10 text-center max-w-4xl mx-auto px-6" data-aos="fade-up" data-aos-duration="800">
+    <h2 class="text-5xl font-extrabold tracking-wide text-white mb-8" tabindex="0">
+     Let's
+     <span class="text-blue-400">
+      Connect
+     </span>
+     &amp; Build Something
+        Amazing
+    </h2>
+    <p class="text-gray-300 text-lg leading-relaxed max-w-3xl mx-auto">
+     Have a project in mind? Drop me a message and let’s bring your vision to life with cutting-edge web development
+        solutions.
+    </p>
+   </div>
+   <div class="relative z-10 max-w-2xl mx-auto mt-12 bg-white/10 backdrop-blur-xl p-8 rounded-3xl border border-white/20 shadow-lg">
+    <form class="flex flex-col gap-6" id="contact-form" novalidate="">
+     <div class="relative">
+      <input aria-describedby="name-desc" aria-required="true" autocomplete="name" class="w-full bg-transparent p-4 text-white border-b border-gray-500 focus:outline-none focus:border-blue-400 transition-all duration-300 peer hover:border-blue-300 focus:ring-2 focus:ring-blue-400" id="name" name="name" required="" type="text"/>
+      <label class="absolute left-4 top-4 text-gray-400 peer-focus:top-0 peer-focus:text-blue-400 transition-all duration-300 cursor-text" for="name">
+       Your Name
+      </label>
+      <span class="sr-only" id="name-desc">
+       Enter your full name
+      </span>
+     </div>
+     <div class="relative">
+      <input aria-describedby="email-desc" aria-required="true" autocomplete="email" class="w-full bg-transparent p-4 text-white border-b border-gray-500 focus:outline-none focus:border-blue-400 transition-all duration-300 peer hover:border-blue-300 focus:ring-2 focus:ring-blue-400" id="email" name="email" required="" type="email"/>
+      <label class="absolute left-4 top-4 text-gray-400 peer-focus:top-0 peer-focus:text-blue-400 transition-all duration-300 cursor-text" for="email">
+       Your Email
+      </label>
+      <span class="sr-only" id="email-desc">
+       Enter your email address
+      </span>
+     </div>
+     <div class="relative">
+      <textarea aria-describedby="message-desc" aria-required="true" class="w-full bg-transparent p-4 text-white border-b border-gray-500 focus:outline-none focus:border-blue-400 transition-all duration-300 peer resize-y min-h-[120px] hover:border-blue-300 focus:ring-2 focus:ring-blue-400" id="message" name="message" required=""></textarea>
+      <label class="absolute left-4 top-4 text-gray-400 peer-focus:top-0 peer-focus:text-blue-400 transition-all duration-300 cursor-text" for="message">
+       Your Message
+      </label>
+      <span class="sr-only" id="message-desc">
+       Enter your message
+      </span>
+     </div>
+     <button aria-label="Send message" class="relative bg-gradient-to-r from-blue-500 to-purple-500 text-white py-4 px-10 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg btn-shine group" type="submit">
+      <span class="relative z-10">
+       Send Message
+      </span>
+      <div class="absolute inset-0 bg-white opacity-10 rounded-full blur-md pointer-events-none group-hover:opacity-25 transition-all duration-300">
+      </div>
+     </button>
+    </form>
+   </div>
+  </section>
+  <!-- Footer -->
+  <footer aria-label="Footer with about, quick links, and social media" class="relative bg-gray-950 text-gray-300 py-16 overflow-hidden">
+   <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-500/10 to-teal-400/10 blur-3xl opacity-40">
+   </div>
+   <div class="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-6">
+    <section>
+     <h3 class="text-2xl font-extrabold text-white mb-4" data-aos="fade-up" data-aos-duration="800">
+      About Us
+     </h3>
+     <p class="text-gray-400 leading-relaxed">
+      Elevate your online presence with cutting-edge web solutions.
+     </p>
+    </section>
+    <nav aria-label="Quick links">
+     <h3 class="text-2xl font-extrabold text-white mb-4" data-aos="fade-up" data-aos-duration="800">
+      Quick Links
+     </h3>
+     <ul class="space-y-3 text-gray-400">
+      <li>
+       <a class="hover:text-blue-400 transition-all duration-300" href="#features" tabindex="0">
+        Features
+       </a>
+      </li>
+      <li>
+       <a class="hover:text-blue-400 transition-all duration-300" href="#seo" tabindex="0">
+        SEO &amp; Optimization
+       </a>
+      </li>
+      <li>
+       <a class="hover:text-blue-400 transition-all duration-300" href="#projects" tabindex="0">
+        Projects
+       </a>
+      </li>
+      <li>
+       <a class="hover:text-blue-400 transition-all duration-300" href="#arcade" tabindex="0">
+        Arcade
+       </a>
+      </li>
+      <li>
+       <a class="hover:text-blue-400 transition-all duration-300" href="#pulse" tabindex="0">
+        Project Pulse
+       </a>
+      </li>
+      <li>
+       <a class="hover:text-blue-400 transition-all duration-300" href="#garden" tabindex="0">
+        Digital Garden
+       </a>
+      </li>
+      <li>
+       <a class="hover:text-blue-400 transition-all duration-300" href="#contact" tabindex="0">
+        Contact
+       </a>
+      </li>
+     </ul>
+    </nav>
+    <section>
+     <h3 class="text-2xl font-extrabold text-white mb-4" data-aos="fade-up" data-aos-duration="800">
+      Connect With Us
+     </h3>
+     <div class="flex space-x-6 text-3xl" role="list">
+      <a aria-label="YouTube" class="text-white hover:text-blue-500 transition-all duration-300 hover:scale-110 hover:shadow-lg" href="https://youtube.com/@agrawaltech.team123?si=n2LNsIdxUcea0puG" rel="noopener noreferrer" tabindex="0" target="_blank">
+       <i class="fab fa-youtube">
+       </i>
+      </a>
+      <a aria-label="X social media" class="text-white hover:text-blue-500 transition-all duration-300 hover:scale-110 hover:shadow-lg" href="https://x.com/TeamAgrawalTech" rel="noopener noreferrer" tabindex="0" target="_blank">
+       <span class="text-3xl">
+        𝕏
+       </span>
+      </a>
+      <a aria-label="WhatsApp" class="text-white hover:text-blue-500 transition-all duration-300 hover:scale-110 hover:shadow-lg" href="https://whatsapp.com/channel/0029VbAsxSN2975ESJQjOc33" rel="noopener noreferrer" tabindex="0" target="_blank">
+       <i class="fab fa-whatsapp">
+       </i>
+      </a>
+      <a aria-label="LinkedIn" class="text-white hover:text-blue-500 transition-all duration-300 hover:scale-110 hover:shadow-lg" href="https://www.linkedin.com/company/agrawal-tech/" rel="noopener noreferrer" tabindex="0" target="_blank">
+       <i class="fab fa-linkedin-in">
+       </i>
+      </a>
+     </div>
+    </section>
+   </div>
+   <div class="relative z-10 mt-12 border-t border-gray-700/50 pt-6 text-center text-gray-500">
+    <span class="text-white font-semibold">
+     Agrawal-Tech
+    </span>
+    . All Rights Reserved.
+   </div>
+  </footer>
+  <script src="script.js" type="module">
+  </script>
+ </body>
+</html>
